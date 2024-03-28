@@ -8,4 +8,7 @@ public class User {
 		this.pw = pw;
 	}
 	
+	public String getId() {
+		return this.id;
+	}
 }
