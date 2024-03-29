@@ -22,6 +22,10 @@ public class NoticeRun {
 	private final int WRITING_MENU = 5;
 	private final int END = 6;
 	
+	private final int WRITE = 1;
+	private final int DELETE = 2;
+	private final int VIEW = 3;
+	
 	private int log;
 	
 	public NoticeRun() {
@@ -58,6 +62,7 @@ public class NoticeRun {
 		}
 		else if(sel == WRITING_MENU	 && isLogin()) {
 			writeSubMenu();
+			wirteRunMenu(inputNumber("메뉴 선택"));
 		}
 		else if(sel == END) {
 			
@@ -123,19 +128,31 @@ public class NoticeRun {
 	
 	// writeSubMenu
 	private void writeSubMenu() {
-		view();
+		viewPostAll();
 		System.out.println("[1]글 작성");
 		System.out.println("[2]글 삭제");
 		System.out.println("[3]게시글 보기");
 	}
 	
+	// wirteRunMenu
+	private void wirteRunMenu(int sel) {
+		if(sel == WRITE) {
+			write();
+		}
+		else if(sel == DELETE) {
+			delete(null);
+		}
+		else if(sel == VIEW) {
+			view();
+		}
+	}
+	
 	// write
 	private void write() {
-		String name = inputString("이름");
 		String title = inputString("제목");
 		String content = inputString("내용");
 		
-		board.addPost(new Post(name, title, content));
+		board.addPost(new Post("", title, content));
 		System.out.println("글 작성 완료");
 	}
 	
@@ -145,9 +162,14 @@ public class NoticeRun {
 		System.out.println("글 삭제 완료");
 	}
 	
+	// viewPostAll
+	private void viewPostAll() {
+		board.viewPostAll();
+	}
+	
 	// view
 	private void view() {
-		board.viewPosts();
+		
 	}
 	
 	// input
