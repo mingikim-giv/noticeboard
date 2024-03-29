@@ -44,6 +44,11 @@ public class Board {
 		return posts.isEmpty();
 	}
 	
+	// indexOut
+	public boolean indexOut(int idx) {
+		return idx >= 0 || idx < posts.size();
+	}
+	
 	// C.
 	public void addPost(Post post) {
 		posts.add(post);
