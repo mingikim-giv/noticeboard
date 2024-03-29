@@ -12,7 +12,6 @@ public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
 	
 	private UserManager userManager = UserManager.getInstance();
-	private Map<String, User> userList;
 	private Board board;
 	
 	private final int JOIN = 1;
@@ -28,7 +27,6 @@ public class NoticeRun {
 	
 	public NoticeRun() {
 		board = new Board();
-		userList = new HashMap<>();
 		log = -1;
 	}
 	
@@ -82,14 +80,15 @@ public class NoticeRun {
 	// join
 	private void join() {
 		String id = inputString("ID");
+		int check = userManager.searchId(id);
 		
-		if(userList.containsKey(id)) {
+		if(check != -1) {
 			System.err.println("중복된 아이디입니다.");
 			return;
 		}
 		else {
 			String pw = inputString("PW");
-			userList.put(id, new User(id, pw));
+			userManager.addUser(id, pw);
 			System.out.println("회원 가입 완료");
 		}
 	}
@@ -108,21 +107,20 @@ public class NoticeRun {
 	// login
 	private void login() {
 		String id = inputString("ID");
+		int idx = userManager.searchId(id);
 		
-		if(!userList.containsKey(id)) {
-			System.err.println("아이디가 존재하지 않습니다.");
+		if(idx == -1) {
+			System.err.println("회원 정보를 다시 입력해주세요.");
 			return;
-		
 		}
 		
-		User user = userList.get(id);
 		String pw = inputString("PW");
+		User user = userManager.getUser(idx);
 		
-		if(!user.getPw().equals(pw)) {
-			System.err.println("비밀번호가 일치하지 않습니다.");
-			return;
+		if(user.getPw().equals(pw)) {
+			log = idx;
+			System.out.printf("%s님 로그인 성공\n", user.getId());
 		}
-		System.out.printf("%s님 로그인 성공\n", user.getId());
 	}
 	
 	// logout
