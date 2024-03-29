@@ -29,7 +29,7 @@ public class Board {
 		
 		for(int i = 0; i < posts.size(); i ++) {
 			Post post = posts.get(i);
-			String data = String.format("%d)제목:%s 글쓴이:%s\n", i+1, post.getTitle(), post.getId());
+			String data = String.format("%d)제목:%s/글쓴이:%s\n", i+1, post.getTitle(), post.getId());
 			System.out.println(data);
 		}
 	}
@@ -48,11 +48,8 @@ public class Board {
 		return posts.set(idx, post);
 	}
 	// D.
-	public void removePost(int idx) {
-		if(idx < 0 || idx >= posts.size()) {
-			System.err.println("유효하지 않은 범위입니다.");
-			return;
-		}
+	public void removePost(Post post) {
+		int idx = searchPostId(post);
 		posts.remove(idx);
 	}
 }
