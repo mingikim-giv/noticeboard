@@ -4,11 +4,14 @@ package noticeboard;
 // ㄴ User CRUD
 // ㄴ Board CRUD
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
 	private UserManager userManager = UserManager.getInstance();
+	private Map<String, User> userList;
 	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
@@ -22,6 +25,7 @@ public class NoticeRun {
 	private int log;
 	
 	public NoticeRun() {
+		userList = new HashMap<>();
 		log = -1;
 	}
 	
@@ -45,7 +49,7 @@ public class NoticeRun {
 			join();
 		}
 		else if(sel == LEAVE && isLogin()) {
-			
+			leave();
 		}
 		else if(sel == LOGIN && !isLogin()) {
 			
@@ -83,7 +87,7 @@ public class NoticeRun {
 		}
 		else {
 			String pw = inputString("PW");
-			userManager.addUser(id, pw);
+			userList.put(id, new User(id, pw));
 			System.out.println("회원 가입 완료");
 		}
 	}
