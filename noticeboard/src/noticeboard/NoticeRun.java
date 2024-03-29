@@ -64,10 +64,10 @@ public class NoticeRun {
 			write();
 		}
 		else if(sel == DELETE && isLogin()) {
-			
+			delete();
 		}
 		else if(sel == VIEW && isLogin()) {
-			
+			view();
 		}
 		else if(sel == END) {
 			
@@ -140,6 +140,15 @@ public class NoticeRun {
 		System.out.println("글 작성 완료!");
 	}
 	
+	// delete
+	private void delete() {
+
+	}
+	
+	// view
+	private void view() {
+		board.viewPosts();
+	}
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
