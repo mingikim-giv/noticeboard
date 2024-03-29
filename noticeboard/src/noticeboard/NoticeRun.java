@@ -61,7 +61,7 @@ public class NoticeRun {
 			logout();
 		}
 		else if(sel == WRITE && isLogin()) {
-			
+			write();
 		}
 		else if(sel == DELETE && isLogin()) {
 			
@@ -82,14 +82,15 @@ public class NoticeRun {
 	// join
 	private void join() {
 		String id = inputString("ID");
+		int check = userManager.searchId(id);
 		
-		if(userList.containsKey(id)) {
+		if(check != -1) {
 			System.err.println("중복된 아이디입니다.");
 			return;
 		}
 		else {
 			String pw = inputString("PW");
-			userList.put(id, new User(id, pw));
+			userManager.addUser(id, pw);
 			System.out.println("회원 가입 완료");
 		}
 	}
@@ -108,27 +109,35 @@ public class NoticeRun {
 	// login
 	private void login() {
 		String id = inputString("ID");
+		int idx = userManager.searchId(id);
 		
-		if(!userList.containsKey(id)) {
+		if(idx == -1) {
 			System.err.println("회원 정보를 다시 입력해주세요.");
 			return;
 		}
 		
-		User user = userList.get(id);
 		String pw = inputString("PW");
+		User user = userManager.getUser(idx);
 		
-		if(!user.getPw().equals(pw)) {
-			System.err.println("회원 정보를 다시 입력해주세요.");
-			return;
+		if(user.getPw().equals(pw)) {
+			log = idx;
+			System.out.printf("%s님 로그인 성공\n", user.getId());
 		}
-		
-		System.out.printf("%s님 로그인 성공\n", user.getId());
 	}
 	
 	// logout
 	private void logout() {
 		log = -1;
 		System.out.println("로그아웃 완료");
+	}
+	
+	// write
+	private void write() {
+		String title = inputString("제목");
+		String content = inputString("내용");
+		
+		board.addPost(new Post("", title, content));
+		System.out.println("글 작성 완료!");
 	}
 	
 	// input
