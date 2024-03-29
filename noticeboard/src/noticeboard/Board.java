@@ -19,6 +19,21 @@ public class Board {
 		}
 		return -1;
 	}
+	
+	// viewPosts
+	public void viewPosts() {
+		if(posts.isEmpty()) {
+			System.err.println("게시글이 비어있습니다.");
+			return;
+		}
+		
+		for(int i = 0; i < posts.size(); i ++) {
+			Post post = posts.get(i);
+			String data = String.format("%d)제목:%s 글쓴이:%s\n", i+1, post.getTitle(), post.getId());
+			System.out.println(data);
+		}
+	}
+	
 	// C.
 	public void addPost(Post post) {
 		posts.add(post);
