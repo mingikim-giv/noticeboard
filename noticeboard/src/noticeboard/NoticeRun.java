@@ -169,7 +169,14 @@ public class NoticeRun {
 	
 	// view
 	private void view() {
+		if(board.isEmpty()) {
+			System.err.println("게시글이 비어있습니다.");
+			return;
+		}
 		
+		int idx = inputNumber("number")-1;
+		
+		board.viewPost(idx);
 	}
 	
 	// input
