@@ -88,6 +88,17 @@ public class NoticeRun {
 		}
 	}
 	
+	// leave
+	private void leave() {
+		String pw = inputString("PW");
+		
+		if(userManager.getUser(log).getPw().equals(pw)) {
+			userManager.removeUser(log);
+			log = -1;
+			System.out.println("회원 탈퇴 완료");
+		}
+	}
+	
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
@@ -108,7 +119,9 @@ public class NoticeRun {
 	}
 	
 	public void run() {
-		printMenu();
-		runMenu(inputNumber("메뉴 선택"));
+		while(true) {
+			printMenu();
+			runMenu(inputNumber("메뉴 선택"));
+		}
 	}
 }
