@@ -20,8 +20,8 @@ public class Board {
 		return -1;
 	}
 	
-	// viewPosts
-	public void viewPosts() {
+	// viewPostAll
+	public void viewPostAll() {
 		if(posts.isEmpty()) {
 			System.err.println("게시글이 비어있습니다.");
 			return;
