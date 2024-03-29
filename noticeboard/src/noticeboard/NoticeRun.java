@@ -108,20 +108,21 @@ public class NoticeRun {
 	// login
 	private void login() {
 		String id = inputString("ID");
-		int idx = userManager.searchId(id);
 		
-		if(idx == -1) {
+		if(!userList.containsKey(id)) {
 			System.err.println("회원 정보를 다시 입력해주세요.");
 			return;
 		}
 		
+		User user = userList.get(id);
 		String pw = inputString("PW");
-		User user = userManager.getUser(idx);
 		
-		if(user.getPw().equals(pw)) {
-			log = idx;
-			System.out.printf("%s님 로그인 성공\n", user.getId());
+		if(!user.getPw().equals(pw)) {
+			System.err.println("회원 정보를 다시 입력해주세요.");
+			return;
 		}
+		
+		System.out.printf("%s님 로그인 성공\n", user.getId());
 	}
 	
 	// logout
