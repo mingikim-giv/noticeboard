@@ -20,6 +20,11 @@ public class Board {
 		return -1;
 	}
 	
+	// viewPost
+	public void viewPost(int idx) {
+		System.out.println(posts.get(idx));
+	}
+	
 	// viewPostAll
 	public void viewPostAll() {
 		if(posts.isEmpty()) {
