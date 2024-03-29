@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
+	private UserManager userManager = UserManager.getInstance();
 	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
@@ -73,7 +74,18 @@ public class NoticeRun {
 	
 	// join
 	private void join() {
+		String id = inputString("ID");
+		int check = userManager.searchId(id);
 		
+		if(check != -1) {
+			System.err.println("중복된 아이디입니다.");
+			return;
+		}
+		else {
+			String pw = inputString("PW");
+			userManager.addUser(id, pw);
+			System.out.println("회원 가입 완료");
+		}
 	}
 	
 	// input
