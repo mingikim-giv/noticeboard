@@ -19,10 +19,8 @@ public class NoticeRun {
 	private final int LEAVE = 2;
 	private final int LOGIN = 3;
 	private final int LOGOUT = 4;
-	private final int WRITE = 5;
-	private final int DELETE = 6;
-	private final int VIEW = 7;
-	private final int END = 8;
+	private final int WRITING_MENU = 5;
+	private final int END = 6;
 	
 	private int log;
 	
@@ -39,10 +37,8 @@ public class NoticeRun {
 		System.out.println("[2]회원 탈퇴");
 		System.out.println("[3]로그인");
 		System.out.println("[4]로그아웃");
-		System.out.println("[5]글 쓰기");
-		System.out.println("[6]글 삭제");
-		System.out.println("[7]게시판 보기");
-		System.out.println("[8]종료");
+		System.out.println("[5]글 메뉴");
+		System.out.println("[6]종료");
 		System.out.println("[=========]");
 	}
 	
@@ -60,14 +56,8 @@ public class NoticeRun {
 		else if(sel == LOGOUT) {
 			logout();
 		}
-		else if(sel == WRITE && isLogin()) {
-			write();
-		}
-		else if(sel == DELETE && isLogin()) {
-			delete(null);
-		}
-		else if(sel == VIEW && isLogin()) {
-			view();
+		else if(sel == WRITING_MENU	 && isLogin()) {
+			writeSubMenu();
 		}
 		else if(sel == END) {
 			
@@ -131,12 +121,21 @@ public class NoticeRun {
 		System.out.println("로그아웃 완료");
 	}
 	
+	// writeSubMenu
+	private void writeSubMenu() {
+		view();
+		System.out.println("[1]글 작성");
+		System.out.println("[2]글 삭제");
+		System.out.println("[3]게시글 보기");
+	}
+	
 	// write
 	private void write() {
+		String name = inputString("이름");
 		String title = inputString("제목");
 		String content = inputString("내용");
 		
-		board.addPost(new Post("", title, content));
+		board.addPost(new Post(name, title, content));
 		System.out.println("글 작성 완료");
 	}
 	
