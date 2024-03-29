@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
 	
+	private Map<String, User> userList;
 	private UserManager userManager = UserManager.getInstance();
 	private Board board;
 	
@@ -26,6 +27,7 @@ public class NoticeRun {
 	private int log;
 	
 	public NoticeRun() {
+		userList = new HashMap<>();
 		board = new Board();
 		log = -1;
 	}
@@ -80,15 +82,14 @@ public class NoticeRun {
 	// join
 	private void join() {
 		String id = inputString("ID");
-		int check = userManager.searchId(id);
 		
-		if(check != -1) {
+		if(userList.containsKey(id)) {
 			System.err.println("중복된 아이디입니다.");
 			return;
 		}
 		else {
 			String pw = inputString("PW");
-			userManager.addUser(id, pw);
+			userList.put(id, new User(id, pw));
 			System.out.println("회원 가입 완료");
 		}
 	}
