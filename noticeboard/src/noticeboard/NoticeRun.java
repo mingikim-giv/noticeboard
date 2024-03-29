@@ -64,7 +64,7 @@ public class NoticeRun {
 			write();
 		}
 		else if(sel == DELETE && isLogin()) {
-			delete();
+			delete(null);
 		}
 		else if(sel == VIEW && isLogin()) {
 			view();
@@ -137,18 +137,20 @@ public class NoticeRun {
 		String content = inputString("내용");
 		
 		board.addPost(new Post("", title, content));
-		System.out.println("글 작성 완료!");
+		System.out.println("글 작성 완료");
 	}
 	
 	// delete
-	private void delete() {
-
+	private void delete(Post post) {
+		board.removePost(post);
+		System.out.println("글 삭제 완료");
 	}
 	
 	// view
 	private void view() {
 		board.viewPosts();
 	}
+	
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
