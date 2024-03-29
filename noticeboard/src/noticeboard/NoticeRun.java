@@ -52,10 +52,10 @@ public class NoticeRun {
 			leave();
 		}
 		else if(sel == LOGIN && !isLogin()) {
-			
+			login();
 		}
 		else if(sel == LOGOUT) {
-			
+			logout();
 		}
 		else if(sel == WRITE && isLogin()) {
 			
@@ -79,9 +79,8 @@ public class NoticeRun {
 	// join
 	private void join() {
 		String id = inputString("ID");
-		int check = userManager.searchId(id);
 		
-		if(check != -1) {
+		if(userList.containsKey(id)) {
 			System.err.println("중복된 아이디입니다.");
 			return;
 		}
@@ -101,6 +100,32 @@ public class NoticeRun {
 			log = -1;
 			System.out.println("회원 탈퇴 완료");
 		}
+	}
+	
+	// login
+	private void login() {
+		String id = inputString("ID");
+		
+		if(!userList.containsKey(id)) {
+			System.err.println("아이디가 존재하지 않습니다.");
+			return;
+		
+		}
+		
+		User user = userList.get(id);
+		String pw = inputString("PW");
+		
+		if(!user.getPw().equals(pw)) {
+			System.err.println("비밀번호가 일치하지 않습니다.");
+			return;
+		}
+		System.out.printf("%s님 로그인 성공\n", user.getId());
+	}
+	
+	// logout
+	private void logout() {
+		log = -1;
+		System.out.println("로그아웃 완료");
 	}
 	
 	// input
