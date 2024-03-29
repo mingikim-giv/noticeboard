@@ -10,8 +10,10 @@ import java.util.Scanner;
 
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
+	
 	private UserManager userManager = UserManager.getInstance();
 	private Map<String, User> userList;
+	private Board board;
 	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
@@ -25,6 +27,7 @@ public class NoticeRun {
 	private int log;
 	
 	public NoticeRun() {
+		board = new Board();
 		userList = new HashMap<>();
 		log = -1;
 	}
