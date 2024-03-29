@@ -39,6 +39,11 @@ public class Board {
 		}
 	}
 	
+	// isEmpty
+	public boolean isEmpty() {
+		return posts.isEmpty();
+	}
+	
 	// C.
 	public void addPost(Post post) {
 		posts.add(post);
