@@ -176,6 +176,11 @@ public class NoticeRun {
 		
 		int idx = inputNumber("number")-1;
 		
+		if(!board.indexOut(idx)) {
+			System.err.println("번호를 다시 입력하세요.");
+			return;
+		}
+		
 		board.viewPost(idx);
 	}
 	
