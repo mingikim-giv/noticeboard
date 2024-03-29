@@ -48,7 +48,7 @@ public class UserManager {
 		list.remove(idx);
 	}
 	
-	// userSize
+	// userSize	
 	public int userSize() {
 		return list.size();
 	}
