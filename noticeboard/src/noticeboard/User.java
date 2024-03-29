@@ -14,12 +14,7 @@ public class User {
 	public String getPw() {
 		return this.pw;
 	}
-	
-	public User clone() {
-		User user = new User(this.id, this.pw);
-		return user;
-	}
-	
+		
 	@Override
 	public String toString() {
 		return String.format("%s/%s", this.id, this.pw);
