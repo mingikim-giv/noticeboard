@@ -17,9 +17,15 @@ public class NoticeRun {
 	private final int VIEW = 7;
 	private final int END = 8;
 	
+	private int log;
+	
+	public NoticeRun() {
+		log = -1;
+	}
+	
 	// printMenu
 	private void printMenu() {
-		System.out.println("[===게시판===]");
+		System.out.println("[===BBS===]");
 		System.out.println("[1]회원 가입");
 		System.out.println("[2]회원 탈퇴");
 		System.out.println("[3]로그인");
@@ -33,30 +39,35 @@ public class NoticeRun {
 	
 	// runMenu
 	private void runMenu(int sel) {
-		if(sel == JOIN) {
+		if(sel == JOIN && !isLogin()) {
 			
 		}
-		else if(sel == LEAVE) {
+		else if(sel == LEAVE && isLogin()) {
 			
 		}
-		else if(sel == LOGIN) {
+		else if(sel == LOGIN && !isLogin()) {
 			
 		}
 		else if(sel == LOGOUT) {
 			
 		}
-		else if(sel == WRITE) {
+		else if(sel == WRITE && isLogin()) {
 			
 		}
-		else if(sel == DELETE) {
+		else if(sel == DELETE && isLogin()) {
 			
 		}
-		else if(sel == VIEW) {
+		else if(sel == VIEW && isLogin()) {
 			
 		}
 		else if(sel == END) {
 			
 		}
+	}
+	
+	// isLogin
+	private boolean isLogin() {
+		return log == -1 ? false : true;
 	}
 	
 	// input
