@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
+	
 	private final int JOIN = 1;
 	private final int LEAVE = 2;
 	private final int LOGIN = 3;
@@ -40,7 +41,7 @@ public class NoticeRun {
 	// runMenu
 	private void runMenu(int sel) {
 		if(sel == JOIN && !isLogin()) {
-			
+			join();
 		}
 		else if(sel == LEAVE && isLogin()) {
 			
@@ -70,6 +71,11 @@ public class NoticeRun {
 		return log == -1 ? false : true;
 	}
 	
+	// join
+	private void join() {
+		
+	}
+	
 	// input
 	private int inputNumber(String message) {
 		int number = -1;
@@ -82,6 +88,11 @@ public class NoticeRun {
 			System.err.println("숫자를 입력하세요.");
 		}
 		return number;
+	}
+	
+	private String inputString(String message) {
+		System.out.println(message + ":");
+		return scan.next();
 	}
 	
 	public void run() {
