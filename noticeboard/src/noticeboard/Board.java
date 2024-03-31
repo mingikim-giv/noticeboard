@@ -13,7 +13,7 @@ public class Board {
 	public int searchPostId(Post post) {
 		for(int i = 0; i < posts.size(); i ++) {
 			Post info = posts.get(i);
-			if(info.getId() == post.getId()) {
+			if(info.getId().equals(post.getId())) {
 				return i;
 			}
 		}
