@@ -26,12 +26,12 @@ public class NoticeRun {
 	private final int DELETE = 2;
 	private final int VIEW = 3;
 	
-	private int log;
+	private String log;
 	
 	public NoticeRun() {
 		userList = new HashMap<>();
 		board = new Board();
-		log = -1;
+		log = null;
 	}
 	
 	// printMenu
@@ -71,21 +71,20 @@ public class NoticeRun {
 	
 	// isLogin
 	private boolean isLogin() {
-		return log == -1 ? false : true;
+		return log == null ? false : true;
 	}
 	
 	// join
 	private void join() {
 		String id = inputString("ID");
-		int check = userManager.searchId(id);
 		
-		if(check != -1) {
+		if(userManager.searchId(id)) {
 			System.err.println("중복된 아이디입니다.");
 			return;
 		}
 		else {
 			String pw = inputString("PW");
-			userManager.addUser(id, pw);
+			userManager.addUser(new User(id, pw));
 			System.out.println("회원 가입 완료");
 		}
 	}
@@ -93,36 +92,39 @@ public class NoticeRun {
 	// leave
 	private void leave() {
 		String pw = inputString("PW");
+		User user = userManager.getUser(log);
 		
-		if(userManager.getUser(log).getPw().equals(pw)) {
-			userManager.removeUser(log);
-			log = -1;
-			System.out.println("회원 탈퇴 완료");
+		if(user.getPw().equals(pw)) {
+			System.err.println("비밀번호를 다시 입력하세요.");
+			return;
 		}
+		
+		userManager.removeUser(user);
+		System.out.println("회원 탈퇴 완료");
+		log = null;
 	}
 	
 	// login
 	private void login() {
 		String id = inputString("ID");
-		int idx = userManager.searchId(id);
 		
-		if(idx == -1) {
+		if(!userManager.searchId(id)) {
 			System.err.println("회원 정보를 다시 입력해주세요.");
 			return;
 		}
 		
 		String pw = inputString("PW");
-		User user = userManager.getUser(idx);
+		User user = userManager.getUser(id);
 		
 		if(user.getPw().equals(pw)) {
-			log = idx;
+			log = id;
 			System.out.printf("%s님 로그인 성공\n", user.getId());
 		}
 	}
 	
 	// logout
 	private void logout() {
-		log = -1;
+		log = null;
 		System.out.println("로그아웃 완료");
 	}
 	
