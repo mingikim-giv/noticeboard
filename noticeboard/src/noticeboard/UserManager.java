@@ -1,13 +1,14 @@
 package noticeboard;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
-	private static ArrayList<User> list;
+	private Map<String, User> list;
 	private static UserManager instance = new UserManager();
 	
 	public UserManager() {
-		list = new ArrayList<>();
+		list = new HashMap<>();
 	}
 	
 	public static UserManager getInstance() {
@@ -15,37 +16,25 @@ public class UserManager {
 	}
 	
 	// searchId
-	public int searchId(String id) {
-		for(int i = 0; i < list.size(); i ++) {
-			User user = list.get(i);
-			if(user.getId().equals(id)) {
-				return i;
-			}
-		}
-		return -1;
+	public boolean searchId(String id) {
+		return list.containsKey(id);
 	}
 	
 	// C.
-	public void addUser(String id, String pw) {
-		User user = new User(id, pw);
-		list.add(user);
+	public void addUser(User user) {
+		list.put(user.getId(), user);
 	}
 	// R.
-	public User getUser(int idx) {
-		User user = list.get(idx);
-		return user;
+	public User getUser(String id) {
+		return list.get(id);
 	}
 	// U.
-	public User setUser(int idx, User user) {
-		return list.set(idx, user);
+	public void setUser(User user) {
+		list.replace(user.getId(), user);
 	}
 	// D.
-	public void removeUser(int idx) {
-		if(idx < 0 || idx >= list.size()) {
-			System.err.println("유효하지 않은 범위입니다.");
-			return;
-		}
-		list.remove(idx);
+	public void removeUser(User user) {
+		list.remove(user.getId());
 	}
 	
 	// userSize	
