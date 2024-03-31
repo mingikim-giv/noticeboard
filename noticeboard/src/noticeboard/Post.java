@@ -21,6 +21,9 @@ public class Post {
 		return this.content;
 	}
 	
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public void setContent(String content) {
 		this.content = content;
 	}
