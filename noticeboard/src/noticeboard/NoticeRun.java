@@ -4,14 +4,11 @@ package noticeboard;
 // ㄴ User CRUD
 // ㄴ Board CRUD
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class NoticeRun {
 	private Scanner scan = new Scanner(System.in);
 	
-	private Map<String, User> userList;
 	private UserManager userManager = UserManager.getInstance();
 	private Board board;
 	
@@ -23,13 +20,13 @@ public class NoticeRun {
 	private final int END = 6;
 	
 	private final int WRITE = 1;
-	private final int DELETE = 2;
-	private final int VIEW = 3;
+	private final int CHANGE = 2;
+	private final int DELETE = 3;
+	private final int VIEW = 4;
 	
 	private String log;
 	
 	public NoticeRun() {
-		userList = new HashMap<>();
 		board = new Board();
 		log = null;
 	}
@@ -62,7 +59,7 @@ public class NoticeRun {
 		}
 		else if(sel == WRITING_MENU	 && isLogin()) {
 			writeSubMenu();
-			wirteRunMenu(inputNumber("메뉴 선택"));
+			writeRunMenu(inputNumber("메뉴 선택"), null);
 		}
 		else if(sel == END) {
 			
@@ -132,17 +129,21 @@ public class NoticeRun {
 	private void writeSubMenu() {
 		viewPostAll();
 		System.out.println("[1]글 작성");
-		System.out.println("[2]글 삭제");
-		System.out.println("[3]게시글 보기");
+		System.out.println("[2]글 수정");
+		System.out.println("[3]글 삭제");
+		System.out.println("[4]게시글 보기");
 	}
 	
 	// wirteRunMenu
-	private void wirteRunMenu(int sel) {
+	private void writeRunMenu(int sel, Post post) {
 		if(sel == WRITE) {
 			write();
 		}
+		else if(sel == CHANGE) {
+			change(post);
+		}
 		else if(sel == DELETE) {
-			delete(null);
+			delete(post);
 		}
 		else if(sel == VIEW) {
 			view();
@@ -156,6 +157,17 @@ public class NoticeRun {
 		
 		board.addPost(new Post(log, title, content));
 		System.out.println("글 작성 완료");
+	}
+	
+	// change
+	private void change(Post post) {
+		String title = inputString("제목");
+		String content = inputString("내용");
+		
+		post.setTitle(title);
+		post.setContent(content);
+		
+		System.out.println("글 수정 완료");
 	}
 	
 	// delete
