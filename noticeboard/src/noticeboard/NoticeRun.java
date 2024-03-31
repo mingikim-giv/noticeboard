@@ -154,7 +154,7 @@ public class NoticeRun {
 		String title = inputString("제목");
 		String content = inputString("내용");
 		
-		board.addPost(new Post("", title, content));
+		board.addPost(new Post(log, title, content));
 		System.out.println("글 작성 완료");
 	}
 	
