@@ -94,7 +94,7 @@ public class NoticeRun {
 		String pw = inputString("PW");
 		User user = userManager.getUser(log);
 		
-		if(user.getPw().equals(pw)) {
+		if(!user.getPw().equals(pw)) {
 			System.err.println("비밀번호를 다시 입력하세요.");
 			return;
 		}
