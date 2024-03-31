@@ -25,10 +25,12 @@ public class NoticeRun {
 	private final int VIEW = 4;
 	
 	private String log;
+	private boolean isEnd;
 	
 	public NoticeRun() {
 		board = new Board();
 		log = null;
+		isEnd = false;
 	}
 	
 	// printMenu
@@ -62,8 +64,13 @@ public class NoticeRun {
 			writeRunMenu(inputNumber("메뉴 선택"), null);
 		}
 		else if(sel == END) {
-			
+			isEnd();
 		}
+	}
+	
+	// isEnd
+	private void isEnd() {
+		isEnd = true;
 	}
 	
 	// isLogin
@@ -218,7 +225,7 @@ public class NoticeRun {
 	}
 	
 	public void run() {
-		while(true) {
+		while(!isEnd) {
 			printMenu();
 			runMenu(inputNumber("메뉴 선택"));
 		}
