@@ -59,7 +59,8 @@ public class Board {
 		return post;
 	}
 	// U.
-	public Post setPost(int idx, Post post) {
+	public Post setPost(Post post) {
+		int idx = searchPostId(post);
 		return posts.set(idx, post);
 	}
 	// D.
