@@ -20,13 +20,14 @@ public class NoticeRun {
 	private final int END = 6;
 	
 	private final int WRITE = 1;
-	private final int CHANGE = 2;
-	private final int DELETE = 3;
-	private final int VIEW = 4;
+	private final int VIEW = 2;
+	
+	private final int CHANGE = 1;
+	private final int DELETE = 2;
 	
 	private String log;
 	private boolean isEnd;
-	
+
 	public NoticeRun() {
 		board = new Board();
 		log = null;
@@ -61,7 +62,7 @@ public class NoticeRun {
 		}
 		else if(sel == WRITING_MENU	 && isLogin()) {
 			writeSubMenu();
-			writeRunMenu(inputNumber("메뉴 선택"), null);
+			writeRunMenu(inputNumber("메뉴 선택"));
 		}
 		else if(sel == END) {
 			isEnd();
@@ -136,24 +137,35 @@ public class NoticeRun {
 	private void writeSubMenu() {
 		viewPostAll();
 		System.out.println("[1]글 작성");
-		System.out.println("[2]글 수정");
-		System.out.println("[3]글 삭제");
-		System.out.println("[4]게시글 보기");
+		System.out.println("[2]게시글 보기");
 	}
 	
 	// wirteRunMenu
-	private void writeRunMenu(int sel, Post post) {
+	private void writeRunMenu(int sel) {
 		if(sel == WRITE) {
 			write();
 		}
-		else if(sel == CHANGE) {
+		else if(sel == VIEW) {
+			view();
+		}
+	}
+	
+	// edit
+	private boolean edit(Post post) {
+		System.out.println("[1] 글 수정");
+		System.out.println("[2] 글 삭제");
+		int sel = inputNumber("메뉴 선택");
+		
+		if(sel == CHANGE) {
 			change(post);
+			return true;
 		}
 		else if(sel == DELETE) {
 			delete(post);
+			return true;
 		}
-		else if(sel == VIEW) {
-			view();
+		else {
+			return false;
 		}
 	}
 	
@@ -174,6 +186,7 @@ public class NoticeRun {
 		post.setTitle(title);
 		post.setContent(content);
 		
+		board.setPost(post);
 		System.out.println("글 수정 완료");
 	}
 	
@@ -202,7 +215,14 @@ public class NoticeRun {
 			return;
 		}
 		
-		board.viewPost(idx);
+		Post post = board.getPost(idx);
+		
+		while(true) {
+			board.viewPost(idx);
+			if(edit(post)) {
+				return;
+			}
+		}
 	}
 	
 	// input
