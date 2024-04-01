@@ -21,4 +21,4 @@
   * README 작성
 
 ## Class Diagram (UML)
-<img src= https://github.com/mingikim-giv/noticeboard/blob/master/images/%EA%B2%8C%EC%8B%9C%ED%8C%90.jpg?raw=true>
+<img src= "https://github.com/mingikim-giv/noticeboard/blob/master/images/%EA%B2%8C%EC%8B%9C%ED%8C%90.jpg?raw=true" width = "300px" height = "300px">
