@@ -22,4 +22,6 @@
 
 ## Class Diagram (UML)
 <img src = "https://github.com/mingikim-giv/noticeboard/blob/master/images/%EA%B2%8C%EC%8B%9C%ED%8C%90.jpg?raw=true" width = "300px" height = "300px">
+
+## DEMO
 <img src = "https://github.com/mingikim-giv/noticeboard/blob/master/images/DEMO.gif?raw=true" width = "400px" height = "400px">
